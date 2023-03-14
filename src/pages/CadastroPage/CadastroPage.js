@@ -47,6 +47,7 @@ export default function CadastroPage(){
                     type="email"
                     name="email"
                     value={form.email}
+                    disabled={carregando}
                     onChange={(event) => atualizaForm(event)}
                     required    
                 ></input>
@@ -55,11 +56,13 @@ export default function CadastroPage(){
                     placeholder="senha"
                     type="password"
                     name="senha"
+                    disabled={carregando}
                     value={form.senha}
                     onChange={(event) => atualizaForm(event)}
                     required    
                 ></input>
                 <input 
+                    disabled={carregando}
                     data-test="user-name-input"
                     placeholder="nome"
                     type="text"
@@ -69,6 +72,7 @@ export default function CadastroPage(){
                     required    
                 ></input>
                 <input 
+                    disabled={carregando}
                     data-test="user-image-input"
                     placeholder="foto"
                     type="url"
@@ -78,7 +82,7 @@ export default function CadastroPage(){
                     required    
                 ></input>
 
-                <button data-test="signup-btn" type="submit">{carregando ? 
+                <button disabled={carregando} data-test="signup-btn" type="submit">{carregando ? 
                     <ThreeDots 
                         height="40" 
                         width="40" 
