@@ -36,6 +36,7 @@ export default function LoginPage (){
             ></img>
             <FormContainer onSubmit={efetuarLogin}>
                 <input 
+                    data-test="email-input"
                     placeholder="email"
                     type="text"
                     name="email"
@@ -45,6 +46,7 @@ export default function LoginPage (){
                     required    
                 ></input>
                 <input 
+                    data-test="password-input"
                     placeholder="senha"
                     type="password"
                     name="senha"
@@ -53,7 +55,7 @@ export default function LoginPage (){
                     onChange={(e) => atualizaForm(e)}
                     required    
                 ></input>              
-                <button disabled={carregando} type="submit">{carregando ? <ThreeDots 
+                <button data-test="login-btn" disabled={carregando} type="submit">{carregando ? <ThreeDots 
                         height="40" 
                         width="40" 
                         radius="9"
@@ -65,7 +67,7 @@ export default function LoginPage (){
                     /> : "Entrar"}</button>
                
             </FormContainer>
-            <Link to={`/cadastro`}>
+            <Link data-test="signup-link" to={`/cadastro`}>
                 <FraseCadastro>Não tem uma conta? Cadastre-se</FraseCadastro>
             </Link>
         </Login>

@@ -42,6 +42,7 @@ export default function CadastroPage(){
             ></img>
             <FormContainer onSubmit={efetuarCadastro}>
                 <input 
+                    data-test="email-input"
                     placeholder="email"
                     type="email"
                     name="email"
@@ -50,6 +51,7 @@ export default function CadastroPage(){
                     required    
                 ></input>
                 <input 
+                    data-test="password-input"
                     placeholder="senha"
                     type="password"
                     name="senha"
@@ -58,6 +60,7 @@ export default function CadastroPage(){
                     required    
                 ></input>
                 <input 
+                    data-test="user-name-input"
                     placeholder="nome"
                     type="text"
                     name="nome"
@@ -66,6 +69,7 @@ export default function CadastroPage(){
                     required    
                 ></input>
                 <input 
+                    data-test="user-image-input"
                     placeholder="foto"
                     type="url"
                     name="foto"
@@ -74,7 +78,7 @@ export default function CadastroPage(){
                     required    
                 ></input>
 
-                <button type="submit">{carregando ? 
+                <button data-test="signup-btn" type="submit">{carregando ? 
                     <ThreeDots 
                         height="40" 
                         width="40" 
@@ -88,7 +92,7 @@ export default function CadastroPage(){
                     "Cadastrar"}
                 </button>
             </FormContainer>
-            <Link to={`/`}>
+            <Link data-test="login-link" to={`/`}>
                 <FraseLogin>Já tem uma conta? Faça login! </FraseLogin>
             </Link>
         </Cadastro>
