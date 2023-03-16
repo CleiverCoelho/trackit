@@ -1,0 +1,87 @@
+import styled from "styled-components"
+import UserContext from "../../contexts/UserContext"
+import { useContext } from "react"
+
+export default function HabitosAPI({diasSelecionados, nome, id}){
+
+    const diasDaSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
+    const idHabito = id;
+
+    function excluirHabito(){
+
+    }
+
+    return (
+        <HabitoContainer>
+            <HabitoNome>
+                {nome}
+            </HabitoNome>
+            <BotoesDia>
+                {diasDaSemana.map( (dia, i) => {
+                    return (
+                        <BotaoDia 
+                            key={i + 87}
+                            fundo={diasSelecionados.includes(i) ? "#CFCFCF" : "white"}
+                            cor={diasSelecionados.includes(i) ? "white" : "#DBDBDB"}
+                        >
+                            {dia}
+                        </BotaoDia>
+                    )
+                })}     
+                <BotaoExcluir>
+                    <ion-icon onClick={excluirHabito} name="trash-outline"></ion-icon>
+                </BotaoExcluir>        
+            </BotoesDia>
+
+        </HabitoContainer>
+    )
+}
+
+const BotaoExcluir = styled.div`
+    position: absolute;
+    bottom: 45px;
+    left: 300px;
+    ion-icon{
+        color: #666666;
+    }
+`
+
+const HabitoNome = styled.p`
+    width: 208px;
+    height: 25px;
+    color: #666666;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+`
+
+const HabitoContainer = styled.div`
+    width: 340px;
+    height: 91px;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-top: 10px;
+`
+const BotoesDia = styled.div`
+    width: 303px;
+    height: 32px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+`
+const BotaoDia = styled.button`
+    background-color: ${(props) => props.fundo};
+    color: ${(props) => props.cor};
+    border: 1px solid #D4D4D4;
+    margin-right: 5px;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+`

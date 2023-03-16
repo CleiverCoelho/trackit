@@ -26,7 +26,7 @@ export default function CadastroPage(){
             password: form.senha
         }
 
-        axios.post(`${BASE_URL}/sign-up`, body)
+        axios.post(`${BASE_URL}/auth/sign-up`, body)
         .then((res) => navigate("/"))
         .catch((err) => {
             alert(err.response.data.message);

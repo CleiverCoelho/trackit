@@ -13,8 +13,6 @@ export default function HojePage(){
     const mes = now.getMonth();
 
     const {userInfo} = useContext(UserContext);
-    console.log(userInfo);
-
 
     return (
         <HojeContainer>

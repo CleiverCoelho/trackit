@@ -9,7 +9,7 @@ import UserContext from "./contexts/UserContext";
 export default function App() {
   
   const [userInfo, setUserInfo] = React.useState({});
-  const [userHabitos, setUserHabitos] = React.useState("");
+  const [habitosAPI, setHabitosAPI] = React.useState([])
   
 //   email
 // : 
@@ -31,13 +31,13 @@ export default function App() {
 // "eyJhbGciOiJIUzI
 
   return (
-    <UserContext.Provider value={{userInfo}}>
+    <UserContext.Provider value={{userInfo, habitosAPI}}>
       <BrowserRouter>
         <Routes>
           <Route path={`/`} element={<LoginPage setUserInfo={setUserInfo}></LoginPage>}></Route>
           <Route path={`/cadastro`} element={<CadastroPage></CadastroPage>}></Route>
           <Route path={`/hoje`} element={<HojePage></HojePage>}></Route>
-          <Route path={`/habitos`} element={<HabitosPage></HabitosPage>}></Route>
+          <Route path={`/habitos`} element={<HabitosPage setHabitosAPI={setHabitosAPI}></HabitosPage>}></Route>
 
 
         </Routes>

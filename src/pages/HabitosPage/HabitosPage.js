@@ -2,14 +2,24 @@ import styled from "styled-components"
 import Logo from "../Logo.png"
 import { Link } from "react-router-dom"
 import { CircularProgressbar, buildStyles} from "react-circular-progressbar"
-import React from "react"
+import React, { useContext } from "react"
 import Habito from "./Habito"
+import { BASE_URL } from "../url/BaseUrl"
 import { useEffect } from "react"
+import UserContext from "../../contexts/UserContext"
+import axios from "axios"
+import HabitoAPI from "./HabitoAPI"
 
-export default function HabitosPage(){
+export default function HabitosPage({setHabitosAPI}){
     
     const [criarHabito, setCriarHabito] = React.useState(false);
     const [habitoCriado, setHabitoCriado] = React.useState({nome: "", dias: []})
+    const [useEFControl, setUseEFControl] = React.useState([]);
+
+
+    const {userInfo, habitosAPI} = useContext(UserContext);
+
+    console.log(habitosAPI);
 
     function adicionarHabito(){
         if(criarHabito === true){
@@ -20,10 +30,18 @@ export default function HabitosPage(){
 
     useEffect ( () => {
         // para fazer a requisicao é precisao que esteja no formato
-        // const config = {headers: { "Authorization": "bearer ${TOKEN} " }}
-        // axios.post('https://api-pagarapido.aquisi.dev.br/company/{ID_EMPRESA}', config)
+        const config = {
+            headers: { "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`}
+        }
+        axios.get(`${BASE_URL}/habits`, config)
+        .then((res) => {
+            setHabitosAPI(res.data);
+        })
+        .catch((err) => {
+            alert(err.response.data.message);
+        })
 
-    }, [])
+    }, [useEFControl]);
 
     return (
         <HabitosContainer>
@@ -36,14 +54,31 @@ export default function HabitosPage(){
                 <p>Meus Habitos</p>
                 <ion-icon onClick={adicionarHabito} name="add"></ion-icon>
             </MeusHabitos>
+
             <ListaHabitos>
-                {criarHabito && <Habito  
+                {habitosAPI.map((habito) => {
+                    return (
+                        <HabitoAPI
+                            key={habito.id}
+                            id={habito.id}
+                            diasSelecionados={habito.days}
+                            nome={habito.name}
+                        ></HabitoAPI>
+                    )
+                })}
+            </ListaHabitos>
+
+            <ListaHabitos>
+                {criarHabito && <Habito 
+                    useEFControl={useEFControl}
+                    setUseEFControl={setUseEFControl} 
                     criarHabito={criarHabito}
                     habitoCriado={habitoCriado}
                     setHabitoCriado={setHabitoCriado}
                     setCriarHabito={setCriarHabito}
                 ></Habito> }    
             </ListaHabitos>
+
 
             <Menu>
                 <LinkUnderscore to="/habitos">

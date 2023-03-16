@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import Logo from "../Logo.png"
-import React, {useContext} from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { BASE_URL } from "../url/BaseUrl";
 import axios from "axios";
-
-import UserContext from "../../contexts/UserContext";
 
 
 export default function LoginPage ({setUserInfo}){
@@ -23,9 +21,10 @@ export default function LoginPage ({setUserInfo}){
         setCarregando(true);
         
         const body = {email: form.email, password: form.senha }
-        axios.post(`${BASE_URL}/login`, body)
+        axios.post(`${BASE_URL}/auth/login`, body)
         .then((res) => {
             setUserInfo(res.data);
+            localStorage.setItem("TOKEN", res.data.token);
             navigate("/hoje");
         })
         .catch((err) => {

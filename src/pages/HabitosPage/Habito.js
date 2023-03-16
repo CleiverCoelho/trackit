@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
+import UserContext from "../../contexts/UserContext";
+import { BASE_URL } from "../url/BaseUrl";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado}) {
+export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, setUseEFControl, useEFControl}) {
     const diasDaSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [habitoSalvo, setHabitoSalvo] = React.useState(false);
+
+    const {userInfo} = useContext(UserContext);
+    const navigate = useNavigate();
 
     function cancelarHabito(){
         setCriarHabito(false);
@@ -14,7 +21,18 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado}) 
         setHabitoSalvo(true);
         const body = {name: habitoCriado.nome, days: habitoCriado.dias}
         console.log(body);
-        // window.location.reload(true);
+        const config = {
+            headers: { "Authorization": `Bearer ${userInfo.token}` }
+        }
+        axios.post(`${BASE_URL}/habits`, body, config)
+        .then((res) => {
+            console.log(res);
+            setHabitoSalvo(false);
+            setUseEFControl([...useEFControl, useEFControl.length + 1])
+        })
+        .catch((err) => {
+            alert(err.response.data.message);
+        })
     }
 
     function toggleDiaHabito (dia) {
