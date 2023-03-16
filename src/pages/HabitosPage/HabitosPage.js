@@ -38,6 +38,7 @@ export default function HabitosPage(){
             </MeusHabitos>
             <ListaHabitos>
                 {criarHabito && <Habito  
+                    criarHabito={criarHabito}
                     habitoCriado={habitoCriado}
                     setHabitoCriado={setHabitoCriado}
                     setCriarHabito={setCriarHabito}

@@ -1,7 +1,9 @@
 import styled from "styled-components"
-import Logo from "../Logo.png"
 import { Link } from "react-router-dom"
 import { CircularProgressbar, buildStyles} from "react-circular-progressbar"
+import UserContext from "../../contexts/UserContext"
+import { useContext } from "react"
+import Logo from "../Logo.png"
 
 export default function HojePage(){
     const now = new Date ()
@@ -9,13 +11,16 @@ export default function HojePage(){
     const pos = now.getDay();
     const dia = now.getDate();
     const mes = now.getMonth();
-    console.log(diasSemana[pos]);
-    
+
+    const {userInfo} = useContext(UserContext);
+    console.log(userInfo);
+
+
     return (
         <HojeContainer>
             <Topo>
                 <p>TrackIt</p>
-                <img src={Logo} alt="FotoPerfil"></img>
+                <img src={userInfo.image} alt="FotoPerfil"></img>
             </Topo>
             
             <DiaContainer>

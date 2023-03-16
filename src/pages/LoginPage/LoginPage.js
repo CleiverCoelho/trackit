@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import Logo from "../Logo.png"
-import React from "react";
+import React, {useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { BASE_URL } from "../url/BaseUrl";
 import axios from "axios";
 
+import UserContext from "../../contexts/UserContext";
 
-export default function LoginPage (){
+
+export default function LoginPage ({setUserInfo}){
     const [form, setForm] = React.useState({ email: "", senha: "" })
     const [carregando, setCarregando] = React.useState(false);
     const navigate = useNavigate();
@@ -22,8 +24,12 @@ export default function LoginPage (){
         
         const body = {email: form.email, password: form.senha }
         axios.post(`${BASE_URL}/login`, body)
-        .then((res) => navigate("/hoje"))
+        .then((res) => {
+            setUserInfo(res.data);
+            navigate("/hoje");
+        })
         .catch((err) => {
+            console.log(err);
             alert(err.response.data.message);
             window.location.reload();
         })

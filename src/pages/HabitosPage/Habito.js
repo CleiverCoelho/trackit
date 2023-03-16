@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado}) {
     const diasDaSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
+    const [habitoSalvo, setHabitoSalvo] = React.useState(false);
 
     function cancelarHabito(){
         setCriarHabito(false);
+        setHabitoSalvo(false);
     }
     function salvarHabito(){
+        setHabitoSalvo(true);
         const body = {name: habitoCriado.nome, days: habitoCriado.dias}
         console.log(body);
         // window.location.reload(true);
@@ -54,7 +58,16 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado}) 
             </FormHabito>
             <ConfirmaHabito>
                     <BotaoCancelar onClick={cancelarHabito}>Cancelar</BotaoCancelar>
-                    <BotaoSalvar onClick={salvarHabito}>Salvar</BotaoSalvar>
+                    <BotaoSalvar onClick={salvarHabito}>{!habitoSalvo ? "Salvar" : <ThreeDots 
+                        height="20" 
+                        width="40" 
+                        radius="9"
+                        color="white" 
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                    />}</BotaoSalvar>
             </ConfirmaHabito>
         </HabitoContainer>
     )
@@ -123,6 +136,9 @@ const BotaoDia = styled.button`
 const BotaoSalvar = styled.button`
     background-color: #52B6FF;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const BotaoCancelar = styled.button`
