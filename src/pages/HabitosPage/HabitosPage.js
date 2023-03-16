@@ -55,20 +55,7 @@ export default function HabitosPage({setHabitosAPI}){
                 <ion-icon onClick={adicionarHabito} name="add"></ion-icon>
             </MeusHabitos>
 
-            <ListaHabitos>
-                {habitosAPI.map((habito) => {
-                    return (
-                        <HabitoAPI
-                            key={habito.id}
-                            id={habito.id}
-                            diasSelecionados={habito.days}
-                            nome={habito.name}
-                        ></HabitoAPI>
-                    )
-                })}
-            </ListaHabitos>
-
-            <ListaHabitos>
+            <CriarHabito>
                 {criarHabito && <Habito 
                     useEFControl={useEFControl}
                     setUseEFControl={setUseEFControl} 
@@ -77,8 +64,22 @@ export default function HabitosPage({setHabitosAPI}){
                     setHabitoCriado={setHabitoCriado}
                     setCriarHabito={setCriarHabito}
                 ></Habito> }    
-            </ListaHabitos>
+            </CriarHabito>
 
+            <ListaHabitos>
+                {habitosAPI.map((habito) => {
+                    return (
+                        <HabitoAPI
+                            key={habito.id}
+                            id={habito.id}
+                            diasSelecionados={habito.days}
+                            nome={habito.name}
+                            useEFControl={useEFControl}
+                            setUseEFControl={setUseEFControl}
+                        ></HabitoAPI>
+                    )
+                })}
+            </ListaHabitos>
 
             <Menu>
                 <LinkUnderscore to="/habitos">
@@ -109,12 +110,21 @@ export default function HabitosPage({setHabitosAPI}){
     )
 }
 
+const CriarHabito = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+`
+
 const ListaHabitos = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
     padding: 15px;
+    margin-bottom: 100px;
 `
 
 const MeusHabitos = styled.div`

@@ -1,14 +1,25 @@
 import styled from "styled-components"
 import UserContext from "../../contexts/UserContext"
 import { useContext } from "react"
+import axios from "axios";
+import { BASE_URL } from "../url/BaseUrl";
 
-export default function HabitosAPI({diasSelecionados, nome, id}){
+export default function HabitosAPI({diasSelecionados, nome, id, useEFControl, setUseEFControl}){
 
     const diasDaSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
     const idHabito = id;
 
     function excluirHabito(){
-
+        if(!window.confirm(`Deseja deletar o Habito: ${nome}?`)){
+            return null
+        }
+        const config = {
+            headers: { "Authorization": `Bearer ${localStorage.getItem("TOKEN")}` }
+        }
+        axios.delete(`${BASE_URL}/habits/${idHabito}`, config)
+        .then((res) => setUseEFControl([...useEFControl, useEFControl.length + 1])
+        )
+        .catch((err) => alert("ERRO AO DELETAR HABITO"));
     }
 
     return (

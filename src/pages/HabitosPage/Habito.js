@@ -28,6 +28,7 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
         .then((res) => {
             console.log(res);
             setHabitoSalvo(false);
+            setCriarHabito(false);
             setUseEFControl([...useEFControl, useEFControl.length + 1])
         })
         .catch((err) => {
