@@ -2,47 +2,47 @@ import styled from "styled-components"
 import Logo from "../Logo.png"
 import { Link } from "react-router-dom"
 import { CircularProgressbar, buildStyles} from "react-circular-progressbar"
+import React from "react"
+import Habito from "./Habito"
+import { useEffect } from "react"
 
-export default function HojePage(){
-    const now = new Date ()
-    const diasSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
-    const pos = now.getDay();
-    const dia = now.getDate();
-    const mes = now.getMonth();
-    console.log(diasSemana[pos]);
+export default function HabitosPage(){
     
+    const [criarHabito, setCriarHabito] = React.useState(false);
+    const [habitoCriado, setHabitoCriado] = React.useState({nome: "", dias: []})
+
+    function adicionarHabito(){
+        if(criarHabito === true){
+            alert("Finalize o cadastro aberto")
+        }
+        setCriarHabito(true);
+    }
+
+    useEffect ( () => {
+        // para fazer a requisicao é precisao que esteja no formato
+        // const config = {headers: { "Authorization": "bearer ${TOKEN} " }}
+        // axios.post('https://api-pagarapido.aquisi.dev.br/company/{ID_EMPRESA}', config)
+
+    }, [])
+
     return (
-        <HojeContainer>
+        <HabitosContainer>
             <Topo>
                 <p>TrackIt</p>
                 <img src={Logo} alt="FotoPerfil"></img>
             </Topo>
-            
-            <DiaContainer>
-                <TextoDiaSemana>{diasSemana[pos]}, {dia}/{mes < 9 && "0"}{mes + 1}</TextoDiaSemana>
-                <TextoHabitosConcluidos>56% dos Hábitos Concluidos</TextoHabitosConcluidos>
 
-            </DiaContainer>
-
-            <TarefasContainer>
-                <Tarefa>
-                    <InfoTarefa>
-                        <h1>Ler 1 capitulo de livro</h1>
-                        <p>Sequencia atual: 3 dias</p>
-                        <p>seu recorde: 5 dias</p>
-                    </InfoTarefa>
-                    <ion-icon name="checkbox"></ion-icon>
-                </Tarefa>
-                <Tarefa>
-                    <InfoTarefa>
-                        <h1>Ler 1 capitulo de livro</h1>
-                        <p>Sequencia atual: 3 dias</p>
-                        <p>seu recorde: 5 dias</p>
-                    </InfoTarefa>
-                    <ion-icon name="checkbox"></ion-icon>
-                </Tarefa>
-                
-            </TarefasContainer>
+            <MeusHabitos>
+                <p>Meus Habitos</p>
+                <ion-icon onClick={adicionarHabito} name="add"></ion-icon>
+            </MeusHabitos>
+            <ListaHabitos>
+                {criarHabito && <Habito  
+                    habitoCriado={habitoCriado}
+                    setHabitoCriado={setHabitoCriado}
+                    setCriarHabito={setCriarHabito}
+                ></Habito> }    
+            </ListaHabitos>
 
             <Menu>
                 <LinkUnderscore to="/habitos">
@@ -69,88 +69,46 @@ export default function HojePage(){
                     <p>Historico</p>
                 </LinkUnderscore>
             </Menu>
-        </HojeContainer>
+        </HabitosContainer>
     )
 }
 
-const TarefasContainer = styled.div`
+const ListaHabitos = styled.div`
     display: flex;
-    flex-direction: column;
-    width: 340px;
-    height: auto;
-    padding: 15px;
-`
-const Tarefa = styled.div`
-    width: 340px;
-    background-color: white;
-    height: 94px;
-    display: flex;
-    border: none;
-    border-radius: 5px;
-    justify-content: space-around;
-    margin-bottom: 10px;
-    ion-icon{
-        width: 91px;
-        height: 91px;
-        color: #E7E7E7;
-    }
-`
-
-const InfoTarefa = styled.div`
-    display: flex;
-    padding: 10px;
-    justify-content: flex-start;
-    flex-direction: column;
-    h1 {
-        color: #666666;
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;
-        margin-bottom: 5px;
-    }
-    p {
-        color: #666666;
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12.976px;
-        line-height: 16px;
-    }
-`
-
-const DiaContainer = styled.div`
-    display: flex;
-    justify-content: flex-start;
     flex-direction: column;
     width: 100%;
     height: auto;
-    padding: 20px;
-`
-const TextoDiaSemana = styled.p`
-    margin-top: 7px;
-    width: 300px;
-    height: 29px;
-    color: #126BA5;
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
+    padding: 15px;
 `
 
-const TextoHabitosConcluidos = styled.p`
-    color: #8FC549;
-    margin-top: 7px;
-    width: 300px;
-    height: 29px;
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
+const MeusHabitos = styled.div`
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    width: 375px;
+    height: 35px;
+    ion-icon {
+        width: 40px;
+        height: 35px;
+        border-radius: 5px;
+        background-color: #52B6FF;
+        color: white;
+    }
+    p {
+        color: #126BA5;
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 23px;
+        line-height: 29px;
+        text-align: center;
+        text-decoration: none;
+    }
 `
 
-const HojeContainer = styled.div`
+const HabitosContainer = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
