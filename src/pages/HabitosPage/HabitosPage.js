@@ -19,7 +19,7 @@ export default function HabitosPage({setHabitosAPI}){
 
     const {userInfo, habitosAPI} = useContext(UserContext);
 
-    console.log(habitosAPI);
+    // console.log(habitosAPI);
 
     function adicionarHabito(){
         if(criarHabito === true){
@@ -35,6 +35,7 @@ export default function HabitosPage({setHabitosAPI}){
         }
         axios.get(`${BASE_URL}/habits`, config)
         .then((res) => {
+            setHabitoCriado({nome: "", dias: []})
             setHabitosAPI(res.data);
         })
         .catch((err) => {
@@ -45,14 +46,14 @@ export default function HabitosPage({setHabitosAPI}){
 
     return (
         <HabitosContainer>
-            <Topo>
+            <Topo data-test="header">
                 <p>TrackIt</p>
-                <img src={Logo} alt="FotoPerfil"></img>
+                <img src={userInfo.image} alt="FotoPerfil"></img>
             </Topo>
 
             <MeusHabitos>
                 <p>Meus Habitos</p>
-                <ion-icon onClick={adicionarHabito} name="add"></ion-icon>
+                <ion-icon data-test="habit-create-btn" onClick={adicionarHabito} name="add"></ion-icon>
             </MeusHabitos>
 
             <CriarHabito>
@@ -65,6 +66,11 @@ export default function HabitosPage({setHabitosAPI}){
                     setCriarHabito={setCriarHabito}
                 ></Habito> }    
             </CriarHabito>
+
+            {habitosAPI.length === 0 && <SemHabitos>
+                Você não tem nenhum hábito cadastrado ainda.
+                Adicione um hábito para começar a Trackear!
+            </SemHabitos>}
 
             <ListaHabitos>
                 {habitosAPI.map((habito) => {
@@ -81,11 +87,11 @@ export default function HabitosPage({setHabitosAPI}){
                 })}
             </ListaHabitos>
 
-            <Menu>
-                <LinkUnderscore to="/habitos">
+            <Menu data-test="menu">
+                <LinkUnderscore data-test="habits-link" to="/habitos">
                     <p>Hábitos</p>
                 </LinkUnderscore>
-                <LinkUnderscore to="/hoje">
+                <LinkUnderscore data-test="today-link" to="/hoje">
                     <Progresso>
                         <CircularProgressbar
                             value={66}
@@ -102,13 +108,26 @@ export default function HabitosPage({setHabitosAPI}){
                     </Progresso>
                 </LinkUnderscore>
                 
-                <LinkUnderscore>
+                <LinkUnderscore data-test="history-link">
                     <p>Historico</p>
                 </LinkUnderscore>
             </Menu>
         </HabitosContainer>
     )
 }
+
+const SemHabitos = styled.p`
+    width: 338px;
+    height: 74px;
+    color: #666666;
+    text-align: center;
+
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+`
 
 const CriarHabito = styled.div`
     display: flex;

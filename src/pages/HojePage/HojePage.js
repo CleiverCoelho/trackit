@@ -16,7 +16,7 @@ export default function HojePage(){
 
     return (
         <HojeContainer>
-            <Topo>
+            <Topo data-test="header">
                 <p>TrackIt</p>
                 <img src={userInfo.image} alt="FotoPerfil"></img>
             </Topo>
@@ -47,11 +47,11 @@ export default function HojePage(){
                 
             </TarefasContainer>
 
-            <Menu>
-                <LinkUnderscore to="/habitos">
+            <Menu data-test="menu">
+                <LinkUnderscore data-test="habit-link" to="/habitos">
                     <p>Hábitos</p>
                 </LinkUnderscore>
-                <LinkUnderscore to="/hoje">
+                <LinkUnderscore data-test="today-link" to="/hoje">
                     <Progresso>
                         <CircularProgressbar
                             value={66}
@@ -68,7 +68,7 @@ export default function HojePage(){
                     </Progresso>
                 </LinkUnderscore>
                 
-                <LinkUnderscore>
+                <LinkUnderscore data-test="history-link">
                     <p>Historico</p>
                 </LinkUnderscore>
             </Menu>

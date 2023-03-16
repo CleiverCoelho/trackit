@@ -23,8 +23,8 @@ export default function HabitosAPI({diasSelecionados, nome, id, useEFControl, se
     }
 
     return (
-        <HabitoContainer>
-            <HabitoNome>
+        <HabitoContainer data-test="habit-container">
+            <HabitoNome data-test="habit-name">
                 {nome}
             </HabitoNome>
             <BotoesDia>
@@ -32,6 +32,7 @@ export default function HabitosAPI({diasSelecionados, nome, id, useEFControl, se
                     return (
                         <BotaoDia 
                             key={i + 87}
+                            data-test="habit-day"
                             fundo={diasSelecionados.includes(i) ? "#CFCFCF" : "white"}
                             cor={diasSelecionados.includes(i) ? "white" : "#DBDBDB"}
                         >
@@ -39,8 +40,8 @@ export default function HabitosAPI({diasSelecionados, nome, id, useEFControl, se
                         </BotaoDia>
                     )
                 })}     
-                <BotaoExcluir>
-                    <ion-icon onClick={excluirHabito} name="trash-outline"></ion-icon>
+                <BotaoExcluir >
+                    <ion-icon data-test="habit-delete-btn" onClick={excluirHabito} name="trash-outline"></ion-icon>
                 </BotaoExcluir>        
             </BotoesDia>
 

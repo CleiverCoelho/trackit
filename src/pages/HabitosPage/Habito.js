@@ -11,7 +11,6 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
     const [habitoSalvo, setHabitoSalvo] = React.useState(false);
 
     const {userInfo} = useContext(UserContext);
-    const navigate = useNavigate();
 
     function cancelarHabito(){
         setCriarHabito(false);
@@ -20,7 +19,7 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
     function salvarHabito(){
         setHabitoSalvo(true);
         const body = {name: habitoCriado.nome, days: habitoCriado.dias}
-        console.log(body);
+        // console.log(body);
         const config = {
             headers: { "Authorization": `Bearer ${userInfo.token}` }
         }
@@ -50,9 +49,10 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
     }
 
     return (
-        <HabitoContainer>
+        <HabitoContainer data-test="habit-create-container">
             <FormHabito>
                 <input 
+                    data-test="habit-name-input"
                     cor={habitoCriado.nome ? "#D4D4D4" : "#666666"}
                     placeholder="nome do hábito"
                     value={habitoCriado.nome}
@@ -65,6 +65,7 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
                         return (
                             <BotaoDia 
                                 key={i + 87}
+                                data-test="habit-day"
                                 fundo={habitoCriado.dias.includes(i) ? "#CFCFCF" : "white"}
                                 cor={habitoCriado.dias.includes(i) ? "white" : "#DBDBDB"}
                                 onClick={() => toggleDiaHabito(i)}
@@ -76,8 +77,8 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
                 </BotoesDia>
             </FormHabito>
             <ConfirmaHabito>
-                    <BotaoCancelar onClick={cancelarHabito}>Cancelar</BotaoCancelar>
-                    <BotaoSalvar onClick={salvarHabito}>{!habitoSalvo ? "Salvar" : <ThreeDots 
+                    <BotaoCancelar data-test="habit-create-cancel-btn" onClick={cancelarHabito}>Cancelar</BotaoCancelar>
+                    <BotaoSalvar data-test="habit-create-save-btn" onClick={salvarHabito}>{!habitoSalvo ? "Salvar" : <ThreeDots 
                         height="20" 
                         width="40" 
                         radius="9"
