@@ -108,7 +108,7 @@ export default function HabitosPage({setHabitosAPI}){
                     </Progresso>
                 </LinkUnderscore>
                 
-                <LinkUnderscore data-test="history-link">
+                <LinkUnderscore to="/historico" data-test="history-link">
                     <p>Historico</p>
                 </LinkUnderscore>
             </Menu>

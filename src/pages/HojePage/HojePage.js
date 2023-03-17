@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { CircularProgressbar, buildStyles} from "react-circular-progressbar"
 import UserContext from "../../contexts/UserContext"
 import { useContext } from "react"
-import Logo from "../Logo.png"
 
 export default function HojePage(){
     const now = new Date ()
@@ -68,7 +67,7 @@ export default function HojePage(){
                     </Progresso>
                 </LinkUnderscore>
                 
-                <LinkUnderscore data-test="history-link">
+                <LinkUnderscore to="/historico" data-test="history-link">
                     <p>Historico</p>
                 </LinkUnderscore>
             </Menu>

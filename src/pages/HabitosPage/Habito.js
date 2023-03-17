@@ -10,6 +10,7 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
     const diasDaSemana = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [habitoSalvo, setHabitoSalvo] = React.useState(false);
 
+
     const {userInfo} = useContext(UserContext);
 
     function cancelarHabito(){
@@ -53,6 +54,7 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
             <FormHabito>
                 <input 
                     data-test="habit-name-input"
+                    disabled={habitoSalvo}
                     cor={habitoCriado.nome ? "#D4D4D4" : "#666666"}
                     placeholder="nome do hábito"
                     value={habitoCriado.nome}
@@ -66,6 +68,7 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
                             <BotaoDia 
                                 key={i + 87}
                                 data-test="habit-day"
+                                disabled={habitoSalvo}
                                 fundo={habitoCriado.dias.includes(i) ? "#CFCFCF" : "white"}
                                 cor={habitoCriado.dias.includes(i) ? "white" : "#DBDBDB"}
                                 onClick={() => toggleDiaHabito(i)}
@@ -77,8 +80,8 @@ export default function Habito({setCriarHabito, habitoCriado, setHabitoCriado, s
                 </BotoesDia>
             </FormHabito>
             <ConfirmaHabito>
-                    <BotaoCancelar data-test="habit-create-cancel-btn" onClick={cancelarHabito}>Cancelar</BotaoCancelar>
-                    <BotaoSalvar data-test="habit-create-save-btn" onClick={salvarHabito}>{!habitoSalvo ? "Salvar" : <ThreeDots 
+                    <BotaoCancelar data-test="habit-create-cancel-btn" disabled={habitoSalvo} onClick={cancelarHabito}>Cancelar</BotaoCancelar>
+                    <BotaoSalvar data-test="habit-create-save-btn" disabled={habitoSalvo} onClick={salvarHabito}>{!habitoSalvo ? "Salvar" : <ThreeDots 
                         height="20" 
                         width="40" 
                         radius="9"
