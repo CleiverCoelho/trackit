@@ -154,6 +154,7 @@ const HojeContainer = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 90px;
 `
 
 const Progresso = styled.div`
@@ -161,7 +162,10 @@ const Progresso = styled.div`
     position: absolute;
     text-align: center;
     bottom: 15px;
-    left: 150px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    left: 145px;
     width: 91px;
     height: 91px;
     font-weight: 700;

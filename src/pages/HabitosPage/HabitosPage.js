@@ -185,7 +185,7 @@ const Progresso = styled.div`
     position: absolute;
     text-align: center;
     bottom: 15px;
-    left: 150px;
+    left: 145px;
     width: 91px;
     height: 91px;
     font-weight: 700;
