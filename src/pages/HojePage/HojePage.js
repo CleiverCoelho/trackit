@@ -1,10 +1,14 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import Tarefa from "./Tarefa"
 import { CircularProgressbar, buildStyles} from "react-circular-progressbar"
 import UserContext from "../../contexts/UserContext"
-import { useContext } from "react"
+import React, { useContext } from "react"
+import { BASE_URL } from "../url/BaseUrl";
+import axios from "axios";
+import { useEffect } from "react";
 
-export default function HojePage(){
+export default function HojePage({setPorcentagem}){
     const now = new Date ()
     const diasSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
     const pos = now.getDay();
@@ -12,6 +16,26 @@ export default function HojePage(){
     const mes = now.getMonth();
 
     const {userInfo} = useContext(UserContext);
+    const [tarefasHoje, setTarefasHoje] = React.useState([]);
+    let tarefasConcluidas = [];
+    const [useEFControl, setUseEFControl] = React.useState([]);    
+    
+    const {porcentagem} = useContext(UserContext);
+
+    useEffect ( () => {
+        // para fazer a requisicao é precisao que esteja no formato
+        const config = {
+            headers: { "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`}
+        }
+        axios.get(`${BASE_URL}/habits/today`, config)
+        .then((res) => {
+            setTarefasHoje(res.data);
+        })
+        .catch((err) => {
+            alert(err.response.data.message);
+        })
+
+    }, [useEFControl]);
 
     return (
         <HojeContainer>
@@ -21,30 +45,42 @@ export default function HojePage(){
             </Topo>
             
             <DiaContainer>
-                <TextoDiaSemana>{diasSemana[pos]}, {dia}/{mes < 9 && "0"}{mes + 1}</TextoDiaSemana>
-                <TextoHabitosConcluidos>56% dos Hábitos Concluidos</TextoHabitosConcluidos>
-
+                <TextoDiaSemana data-test="today">{diasSemana[pos]}, {dia}/{mes < 9 && "0"}{mes + 1}</TextoDiaSemana>
+                <TextoHabitosConcluidos data-test="today-counter"
+                    cor={porcentagem === 0 ? "#BABABA" : "#8FC549"}
+                    >
+                        {porcentagem === 0 ? "Nenhum hábito concluido ainda" : 
+                            `${porcentagem}% dos habitos concluídos`    
+                        }
+                </TextoHabitosConcluidos>
             </DiaContainer>
-
             <TarefasContainer>
-                <Tarefa>
-                    <InfoTarefa>
-                        <h1>Ler 1 capitulo de livro</h1>
-                        <p>Sequencia atual: 3 dias</p>
-                        <p>seu recorde: 5 dias</p>
-                    </InfoTarefa>
-                    <ion-icon name="checkbox"></ion-icon>
-                </Tarefa>
-                <Tarefa>
-                    <InfoTarefa>
-                        <h1>Ler 1 capitulo de livro</h1>
-                        <p>Sequencia atual: 3 dias</p>
-                        <p>seu recorde: 5 dias</p>
-                    </InfoTarefa>
-                    <ion-icon name="checkbox"></ion-icon>
-                </Tarefa>
-                
+                {tarefasHoje.map( (tarefa, index) => {
+                        if(tarefa.done){
+                            tarefasConcluidas.push(tarefa.id);
+                            console.log(index);
+                        }
+                        if(index === tarefasHoje.length - 1){
+
+                            setPorcentagem(tarefasConcluidas.length * 100 / tarefasHoje.length)
+                        }
+                        return (
+                            <Tarefa key={tarefa.id}
+                                tarefasHoje={tarefasHoje.length}
+                                setPorcentagem={setPorcentagem}
+                                useEFControl={useEFControl}
+                                setUseEFControl={setUseEFControl}
+                                nome={tarefa.name}
+                                id={tarefa.id}
+                                maiorSequencia={tarefa.highestSequence}
+                                sequenciaAtual = {tarefa.currentSequence}
+                                done={tarefa.done}
+                                tarefasConcluidas={tarefasConcluidas}
+                            ></Tarefa>
+                        )
+                    } )}
             </TarefasContainer>
+                
 
             <Menu data-test="menu">
                 <LinkUnderscore data-test="habit-link" to="/habitos">
@@ -53,7 +89,7 @@ export default function HojePage(){
                 <LinkUnderscore data-test="today-link" to="/hoje">
                     <Progresso>
                         <CircularProgressbar
-                            value={66}
+                            value={porcentagem}
                             text={`Hoje`}
                             background
                             backgroundPadding={7}
@@ -82,45 +118,6 @@ const TarefasContainer = styled.div`
     height: auto;
     padding: 15px;
 `
-const Tarefa = styled.div`
-    width: 340px;
-    background-color: white;
-    height: 94px;
-    display: flex;
-    border: none;
-    border-radius: 5px;
-    justify-content: space-around;
-    margin-bottom: 10px;
-    ion-icon{
-        width: 91px;
-        height: 91px;
-        color: #E7E7E7;
-    }
-`
-
-const InfoTarefa = styled.div`
-    display: flex;
-    padding: 10px;
-    justify-content: flex-start;
-    flex-direction: column;
-    h1 {
-        color: #666666;
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 19.976px;
-        line-height: 25px;
-        margin-bottom: 5px;
-    }
-    p {
-        color: #666666;
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12.976px;
-        line-height: 16px;
-    }
-`
 
 const DiaContainer = styled.div`
     display: flex;
@@ -142,7 +139,7 @@ const TextoDiaSemana = styled.p`
 `
 
 const TextoHabitosConcluidos = styled.p`
-    color: #8FC549;
+    color: ${(props) => props.cor};
     margin-top: 7px;
     width: 300px;
     height: 29px;

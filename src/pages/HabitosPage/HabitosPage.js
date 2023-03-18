@@ -17,7 +17,7 @@ export default function HabitosPage({setHabitosAPI}){
     const [useEFControl, setUseEFControl] = React.useState([]);
 
 
-    const {userInfo, habitosAPI} = useContext(UserContext);
+    const {userInfo, habitosAPI, porcentagem} = useContext(UserContext);
 
     // console.log(habitosAPI);
 
@@ -94,7 +94,7 @@ export default function HabitosPage({setHabitosAPI}){
                 <LinkUnderscore data-test="today-link" to="/hoje">
                     <Progresso>
                         <CircularProgressbar
-                            value={66}
+                            value={porcentagem}
                             text={`Hoje`}
                             background
                             backgroundPadding={7}

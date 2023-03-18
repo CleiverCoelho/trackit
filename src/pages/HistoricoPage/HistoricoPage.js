@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import UserContext from "../../contexts/UserContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Link } from "react-router-dom";
 
 export default function HistoricoPage () {
 
-    const {userInfo} = useContext(UserContext);
+    const { userInfo, porcentagem } = useContext(UserContext);
 
     return (
         <HistoricoContainer>
@@ -22,30 +22,30 @@ export default function HistoricoPage () {
             </EmBreve>
 
             <Menu data-test="menu">
-            <LinkUnderscore data-test="habits-link" to="/habitos">
-                <p>Hábitos</p>
-            </LinkUnderscore>
-            <LinkUnderscore data-test="today-link" to="/hoje">
-                <Progresso>
-                    <CircularProgressbar
-                        value={66}
-                        text={`Hoje`}
-                        background
-                        backgroundPadding={7}
-                        styles={buildStyles({
-                        backgroundColor: "#3e98c7",
-                        textColor: "#fff",
-                        pathColor: "#fff",
-                        trailColor: "transparent"
-                        })}
-                    />
-                </Progresso>
-            </LinkUnderscore>
+                <LinkUnderscore data-test="habits-link" to="/habitos">
+                    <p>Hábitos</p>
+                </LinkUnderscore>
+                <LinkUnderscore data-test="today-link" to="/hoje">
+                    <Progresso>
+                        <CircularProgressbar
+                            value={porcentagem}
+                            text={`Hoje`}
+                            background
+                            backgroundPadding={7}
+                            styles={buildStyles({
+                            backgroundColor: "#3e98c7",
+                            textColor: "#fff",
+                            pathColor: "#fff",
+                            trailColor: "transparent"
+                            })}
+                        />
+                    </Progresso>
+                </LinkUnderscore>
 
-            <LinkUnderscore to="/historico" data-test="history-link">
-                <p>Historico</p>
-            </LinkUnderscore>
-        </Menu>
+                <LinkUnderscore to="/historico" data-test="history-link">
+                    <p>Historico</p>
+                </LinkUnderscore>
+            </Menu>
         </HistoricoContainer>
     )
 

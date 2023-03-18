@@ -11,33 +11,15 @@ export default function App() {
   
   const [userInfo, setUserInfo] = React.useState({});
   const [habitosAPI, setHabitosAPI] = React.useState([])
-  
-//   email
-// : 
-// "driventestandoemail12345678@gmail.com"
-// id
-// : 
-// 8202
-// image
-// : 
-// "https://www.google.com/url?sa=i&url=https%3A%2F%2Fbr.pinterest.com%2Fpin%2F968907307305511729%2F&psig=AOvVaw2UapwERpD1NpHCqtkqTfQL&ust=1678906782692000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNiMxaSN3P0CFQAAAAAdAAAAABAE"
-// name
-// : 
-// "DrivenTesteCleiver"
-// password
-// : 
-// "12345678"
-// token
-// : 
-// "eyJhbGciOiJIUzI
+  const [porcentagem, setPorcentagem] = React.useState(0);
 
   return (
-    <UserContext.Provider value={{userInfo, habitosAPI}}>
+    <UserContext.Provider value={{userInfo, habitosAPI, porcentagem}}>
       <BrowserRouter>
         <Routes>
           <Route path={`/`} element={<LoginPage setUserInfo={setUserInfo}></LoginPage>}></Route>
           <Route path={`/cadastro`} element={<CadastroPage></CadastroPage>}></Route>
-          <Route path={`/hoje`} element={<HojePage></HojePage>}></Route>
+          <Route path={`/hoje`} element={<HojePage setPorcentagem={setPorcentagem}></HojePage>}></Route>
           <Route path={`/habitos`} element={<HabitosPage setHabitosAPI={setHabitosAPI}></HabitosPage>}></Route>
           <Route path={`/historico`} element={<HistoricoPage></HistoricoPage>}></Route>
 
