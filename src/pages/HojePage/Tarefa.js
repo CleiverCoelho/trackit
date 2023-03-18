@@ -46,8 +46,8 @@ export default function Tarefa({nome, sequenciaAtual, maiorSequencia, done,
         <TarefaContainer data-test="today-habit-container" colorCheck={done ? "#8FC549" : "#E7E7E7"}>
             <InfoTarefa>
                 <h1 data-test="today-habit-name">{nome}</h1>
-                <p data-test="today-habit-sequence">Sequencia atual: {sequenciaAtual} dias</p>
-                <p data-test="today-habit-record">seu recorde: {maiorSequencia} dias</p>
+                <SequenciaAtual data-test="today-habit-sequence" colorCheck={done ? "#8FC549" : "#666666"}>Sequencia atual: <span>{sequenciaAtual} dias</span></SequenciaAtual>
+                <SequenciaRecorde data-test="today-habit-record">seu recorde: {maiorSequencia} dias</SequenciaRecorde>
             </InfoTarefa>
             {carregando ? 
                 <DivImg>
@@ -104,12 +104,27 @@ const InfoTarefa = styled.div`
         line-height: 25px;
         margin-bottom: 5px;
     }
-    p {
-        color: #666666;
+`
+const SequenciaAtual = styled.p`
+    color: #666666;
         font-family: 'Lexend Deca';
         font-style: normal;
         font-weight: 400;
         font-size: 13px;
         line-height: 16px;
+        span {
+            color: ${(props) => props.colorCheck};
+        }
+`
+
+const SequenciaRecorde = styled.p`
+    color: #666666;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    span {
+        color: ${(props) => props.colorCheck};
     }
 `
