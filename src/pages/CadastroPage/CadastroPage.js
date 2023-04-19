@@ -5,6 +5,7 @@ import React from "react";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import { BASE_URL } from "../url/BaseUrl";
+import fotoCadastro from "./cadastro_foto.jpg"
 
 export default function CadastroPage(){
     const [carregando, setCarregando] = React.useState(false);
@@ -22,7 +23,7 @@ export default function CadastroPage(){
         const body = {
             email: form.email,
             name: form.nome,
-            image: form.foto,
+            image: "https://thumbs.dreamstime.com/b/%C3%ADcone-do-vetor-de-cor-semiplana-sinal-avatar-azul-perfil-cliente-convidado-an%C3%B4nimo-item-tamanho-inteiro-em-branco-ilustra%C3%A7%C3%A3o-252084854.jpg",
             password: form.senha
         }
 
@@ -43,7 +44,7 @@ export default function CadastroPage(){
             <FormContainer onSubmit={efetuarCadastro}>
                 <input 
                     data-test="email-input"
-                    placeholder="email"
+                    placeholder="email (pode ser ficcticio)"
                     type="email"
                     name="email"
                     value={form.email}
@@ -68,16 +69,6 @@ export default function CadastroPage(){
                     type="text"
                     name="nome"
                     value={form.nome}
-                    onChange={(event) => atualizaForm(event)}
-                    required    
-                ></input>
-                <input 
-                    disabled={carregando}
-                    data-test="user-image-input"
-                    placeholder="foto"
-                    type="url"
-                    name="foto"
-                    value={form.foto}
                     onChange={(event) => atualizaForm(event)}
                     required    
                 ></input>
