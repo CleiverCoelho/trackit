@@ -6,13 +6,13 @@ Try it out now on the application deploy: https://projeto11-trackit-murex-gamma.
 
 ## About
 
-- [x] Em estados globais (como usuário logado e progresso do dia) utilizei recursos da ContextAPI para evitar State Dealing
-- [x] Tela Login (rota `/`) utilizando a biblioteca react-loader-spinner para fase de carregamento
-- [x] Tela Cadastro `/cadastro` /cadastro)
-- [x] Topo são exibidas as informações do usuário
-- [x] No Menu o botão de Hoje rota `/hoje` deve exibir uma barra de progresso circular indicando a porcentagem de conclusão de hábitos do usuario usando utilizando a biblioteca react-circular-progressbar
-- [x] A tela de Habitos rota `/habitos` carrega os hábitos do usuário através de uma requisicao axios para uma API privada
-- [x] Tela hoje rota `/hoje` carrega todos os hábitos cadastrados ao dia correspondente utilizando a biblioteca dayjs
+- [x] I used ContextAPI resources for managing global states, such as the logged-in user and daily progress, to avoid state handling issues.
+- [x] The Login screen (route `/`) uses the `react-loader-spinner` library for the loading phase.
+- [x] The Registration screen (`/cadastro`) is implemented.
+- [x] User information is displayed at the top.
+- [x] In the menu, the "Today" button (route `/hoje`) displays a circular progress bar indicating the user's habit completion percentage using the `react-circular-progressbar` library.
+- [x] The "Habits" screen (route `/habitos`) loads user habits through an Axios request to a private API.
+- [x] The "Today" screen (route `/hoje`) loads all habits registered for the corresponding day using the `dayjs` library.
 
 ## Installation
 
