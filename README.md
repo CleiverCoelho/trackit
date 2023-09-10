@@ -14,6 +14,10 @@ Try it out now on the application deploy: https://projeto11-trackit-murex-gamma.
 - [x] The "Habits" screen (route `/habitos`) loads user habits through an Axios request to a private API.
 - [x] The "Today" screen (route `/hoje`) loads all habits registered for the corresponding day using the `dayjs` library.
 
+#
+https://github.com/CleiverCoelho/trackit/assets/102709370/f429013c-b3de-4972-8e2f-8c422c514399
+
+
 ## Main Technologies
 <p>
     <img style='margin: 5px;' src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"/>
