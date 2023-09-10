@@ -32,6 +32,8 @@ https://github.com/CleiverCoelho/trackit/assets/102709370/f429013c-b3de-4972-8e2
   <img style='margin: 5px;' src="(https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
   <img style='margin: 5px;' src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/>
   <img style='margin: 5px;' src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white"/>
+
 </p>
 
 ## Installation
