@@ -17,7 +17,7 @@ Try it out now on the application deploy: https://projeto11-trackit-murex-gamma.
 #
 https://github.com/CleiverCoelho/trackit/assets/102709370/f429013c-b3de-4972-8e2f-8c422c514399
 
-<img width='250px' height='500px' src="https://github.com/CleiverCoelho/trackit/assets/102709370/694cb106-916a-4e47-a5d7-4d014db1b0bf"/>
+<img width='1000px' height='2000px' src="https://github.com/CleiverCoelho/trackit/assets/102709370/694cb106-916a-4e47-a5d7-4d014db1b0bf"/>
 
 
 ## Main Technologies
