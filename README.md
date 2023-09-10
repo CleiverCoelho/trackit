@@ -1,6 +1,6 @@
 # TrackIt
 
-FrontEnd application developed in ReactJs for routine activities management. Here, you can organize your daily routine and activities by day and track it all in one aplication!
+FrontEnd Web Mobile application developed in ReactJs for routine activities management. Here, you can organize your daily routine and activities by day and track it all in one aplication!
 
 Try it out now on the application deploy: https://projeto11-trackit-murex-gamma.vercel.app/ <br/> <br/>
 
