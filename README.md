@@ -15,7 +15,10 @@ Try it out now on the application deploy: https://projeto11-trackit-murex-gamma.
 - [x] The "Today" screen (route `/hoje`) loads all habits registered for the corresponding day using the `dayjs` library.
 
 #
-https://github.com/CleiverCoelho/trackit/assets/102709370/f429013c-b3de-4972-8e2f-8c422c514399
+<div>
+    https://github.com/CleiverCoelho/trackit/assets/102709370/f429013c-b3de-4972-8e2f-8c422c514399
+    ![Screenshot_20230910_133159_Gallery](https://github.com/CleiverCoelho/trackit/assets/102709370/694cb106-916a-4e47-a5d7-4d014db1b0bf)
+</div>
 
 
 ## Main Technologies
